@@ -1,0 +1,539 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3C1164DD2A338E4400963E6E /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1164DC2A338E4400963E6E /* App.swift */; };
+		3C1164DF2A338E4400963E6E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1164DE2A338E4400963E6E /* MainView.swift */; };
+		3C1164E12A338E4500963E6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C1164E02A338E4500963E6E /* Assets.xcassets */; };
+		3C1164E42A338E4500963E6E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C1164E32A338E4500963E6E /* Preview Assets.xcassets */; };
+		3C1164EC2A3393A300963E6E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C1164EB2A3393A300963E6E /* GoogleService-Info.plist */; };
+		3C1164F82A33994400963E6E /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 3C1164F72A33994400963E6E /* FSCalendar */; };
+		3C6B3DB92A33ADF60099B4D6 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B3DB82A33ADF60099B4D6 /* Friend.swift */; };
+		3C6B3DBB2A33AE100099B4D6 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B3DBA2A33AE100099B4D6 /* FirebaseService.swift */; };
+		3C6B3DBD2A33AE3A0099B4D6 /* ViewAndEditBirthdaysViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B3DBC2A33AE3A0099B4D6 /* ViewAndEditBirthdaysViewModel.swift */; };
+		3C6B3DC52A33AEAF0099B4D6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B3DBE2A33AEAF0099B4D6 /* SettingsView.swift */; };
+		3C6B3DC62A33AEAF0099B4D6 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B3DBF2A33AEAF0099B4D6 /* CalendarView.swift */; };
+		3C6B3DC72A33AEAF0099B4D6 /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B3DC02A33AEAF0099B4D6 /* NavigationBarView.swift */; };
+		3C6B3DC82A33AEAF0099B4D6 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B3DC12A33AEAF0099B4D6 /* LoginView.swift */; };
+		3C6B3DC92A33AEAF0099B4D6 /* ViewAndEditBirthdaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B3DC22A33AEAF0099B4D6 /* ViewAndEditBirthdaysView.swift */; };
+		3C6B3DCA2A33AEAF0099B4D6 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B3DC32A33AEAF0099B4D6 /* ListView.swift */; };
+		3C6B3DCB2A33AEAF0099B4D6 /* AddFriendForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B3DC42A33AEAF0099B4D6 /* AddFriendForm.swift */; };
+		3C6B3DCD2A33AEF10099B4D6 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B3DCC2A33AEF10099B4D6 /* LoginViewModel.swift */; };
+		F3B681E3E829CC4ADEEFCBB4 /* Pods_basic_birthdays_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B3F048146EB09D0D3444068 /* Pods_basic_birthdays_app.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1F6F76D8B3F35BB20FD480EB /* Pods-basic birthdays app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-basic birthdays app.release.xcconfig"; path = "Target Support Files/Pods-basic birthdays app/Pods-basic birthdays app.release.xcconfig"; sourceTree = "<group>"; };
+		3C1164D92A338E4400963E6E /* basic birthdays app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "basic birthdays app.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C1164DC2A338E4400963E6E /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		3C1164DE2A338E4400963E6E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		3C1164E02A338E4500963E6E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3C1164E32A338E4500963E6E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		3C1164EA2A338E8500963E6E /* basic birthdays app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "basic birthdays app.entitlements"; sourceTree = "<group>"; };
+		3C1164EB2A3393A300963E6E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3C1164F92A339DE200963E6E /* basic-birthdays-app-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "basic-birthdays-app-Info.plist"; sourceTree = SOURCE_ROOT; };
+		3C6B3DB82A33ADF60099B4D6 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
+		3C6B3DBA2A33AE100099B4D6 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
+		3C6B3DBC2A33AE3A0099B4D6 /* ViewAndEditBirthdaysViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAndEditBirthdaysViewModel.swift; sourceTree = "<group>"; };
+		3C6B3DBE2A33AEAF0099B4D6 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		3C6B3DBF2A33AEAF0099B4D6 /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		3C6B3DC02A33AEAF0099B4D6 /* NavigationBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
+		3C6B3DC12A33AEAF0099B4D6 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		3C6B3DC22A33AEAF0099B4D6 /* ViewAndEditBirthdaysView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewAndEditBirthdaysView.swift; sourceTree = "<group>"; };
+		3C6B3DC32A33AEAF0099B4D6 /* ListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		3C6B3DC42A33AEAF0099B4D6 /* AddFriendForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendForm.swift; sourceTree = "<group>"; };
+		3C6B3DCC2A33AEF10099B4D6 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		4B3F048146EB09D0D3444068 /* Pods_basic_birthdays_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_basic_birthdays_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAFA95A22E164A954E58586A /* Pods-basic birthdays app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-basic birthdays app.debug.xcconfig"; path = "Target Support Files/Pods-basic birthdays app/Pods-basic birthdays app.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3C1164D62A338E4400963E6E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C1164F82A33994400963E6E /* FSCalendar in Frameworks */,
+				F3B681E3E829CC4ADEEFCBB4 /* Pods_basic_birthdays_app.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3C1164D02A338E4400963E6E = {
+			isa = PBXGroup;
+			children = (
+				3C1164DB2A338E4400963E6E /* basic birthdays app */,
+				3C1164DA2A338E4400963E6E /* Products */,
+				E5ECF5DA63083B7370497F16 /* Pods */,
+				BF554321F8CFF425B84AB245 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		3C1164DA2A338E4400963E6E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3C1164D92A338E4400963E6E /* basic birthdays app.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3C1164DB2A338E4400963E6E /* basic birthdays app */ = {
+			isa = PBXGroup;
+			children = (
+				3C6B3DB72A33ADE40099B4D6 /* Views */,
+				3C6B3DB62A33ADDD0099B4D6 /* ViewModels */,
+				3C6B3DB52A33ADD80099B4D6 /* Services */,
+				3C6B3DB42A33ADCF0099B4D6 /* Models */,
+				3C1164F92A339DE200963E6E /* basic-birthdays-app-Info.plist */,
+				3C1164EA2A338E8500963E6E /* basic birthdays app.entitlements */,
+				3C1164DC2A338E4400963E6E /* App.swift */,
+				3C1164DE2A338E4400963E6E /* MainView.swift */,
+				3C1164EB2A3393A300963E6E /* GoogleService-Info.plist */,
+				3C1164E02A338E4500963E6E /* Assets.xcassets */,
+				3C1164E22A338E4500963E6E /* Preview Content */,
+			);
+			path = "basic birthdays app";
+			sourceTree = "<group>";
+		};
+		3C1164E22A338E4500963E6E /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				3C1164E32A338E4500963E6E /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		3C6B3DB42A33ADCF0099B4D6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3C6B3DB82A33ADF60099B4D6 /* Friend.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3C6B3DB52A33ADD80099B4D6 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				3C6B3DBA2A33AE100099B4D6 /* FirebaseService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		3C6B3DB62A33ADDD0099B4D6 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				3C6B3DBC2A33AE3A0099B4D6 /* ViewAndEditBirthdaysViewModel.swift */,
+				3C6B3DCC2A33AEF10099B4D6 /* LoginViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		3C6B3DB72A33ADE40099B4D6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3C6B3DC42A33AEAF0099B4D6 /* AddFriendForm.swift */,
+				3C6B3DBF2A33AEAF0099B4D6 /* CalendarView.swift */,
+				3C6B3DC32A33AEAF0099B4D6 /* ListView.swift */,
+				3C6B3DC12A33AEAF0099B4D6 /* LoginView.swift */,
+				3C6B3DC02A33AEAF0099B4D6 /* NavigationBarView.swift */,
+				3C6B3DBE2A33AEAF0099B4D6 /* SettingsView.swift */,
+				3C6B3DC22A33AEAF0099B4D6 /* ViewAndEditBirthdaysView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BF554321F8CFF425B84AB245 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4B3F048146EB09D0D3444068 /* Pods_basic_birthdays_app.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E5ECF5DA63083B7370497F16 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AAFA95A22E164A954E58586A /* Pods-basic birthdays app.debug.xcconfig */,
+				1F6F76D8B3F35BB20FD480EB /* Pods-basic birthdays app.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3C1164D82A338E4400963E6E /* basic birthdays app */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3C1164E72A338E4500963E6E /* Build configuration list for PBXNativeTarget "basic birthdays app" */;
+			buildPhases = (
+				479AF37F55B7B58FCEB68322 /* [CP] Check Pods Manifest.lock */,
+				3C1164D52A338E4400963E6E /* Sources */,
+				3C1164D62A338E4400963E6E /* Frameworks */,
+				3C1164D72A338E4400963E6E /* Resources */,
+				79C674548437E5149FD5B837 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "basic birthdays app";
+			packageProductDependencies = (
+				3C1164F72A33994400963E6E /* FSCalendar */,
+			);
+			productName = "basic birthdays app";
+			productReference = 3C1164D92A338E4400963E6E /* basic birthdays app.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3C1164D12A338E4400963E6E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					3C1164D82A338E4400963E6E = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 3C1164D42A338E4400963E6E /* Build configuration list for PBXProject "basic birthdays app" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3C1164D02A338E4400963E6E;
+			packageReferences = (
+				3C1164F62A33994400963E6E /* XCRemoteSwiftPackageReference "FSCalendar" */,
+			);
+			productRefGroup = 3C1164DA2A338E4400963E6E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3C1164D82A338E4400963E6E /* basic birthdays app */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3C1164D72A338E4400963E6E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C1164E42A338E4500963E6E /* Preview Assets.xcassets in Resources */,
+				3C1164E12A338E4500963E6E /* Assets.xcassets in Resources */,
+				3C1164EC2A3393A300963E6E /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		479AF37F55B7B58FCEB68322 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-basic birthdays app-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		79C674548437E5149FD5B837 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-basic birthdays app/Pods-basic birthdays app-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-basic birthdays app/Pods-basic birthdays app-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-basic birthdays app/Pods-basic birthdays app-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3C1164D52A338E4400963E6E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C6B3DB92A33ADF60099B4D6 /* Friend.swift in Sources */,
+				3C6B3DC62A33AEAF0099B4D6 /* CalendarView.swift in Sources */,
+				3C6B3DC72A33AEAF0099B4D6 /* NavigationBarView.swift in Sources */,
+				3C6B3DC82A33AEAF0099B4D6 /* LoginView.swift in Sources */,
+				3C6B3DC92A33AEAF0099B4D6 /* ViewAndEditBirthdaysView.swift in Sources */,
+				3C6B3DBD2A33AE3A0099B4D6 /* ViewAndEditBirthdaysViewModel.swift in Sources */,
+				3C1164DF2A338E4400963E6E /* MainView.swift in Sources */,
+				3C6B3DCB2A33AEAF0099B4D6 /* AddFriendForm.swift in Sources */,
+				3C6B3DCD2A33AEF10099B4D6 /* LoginViewModel.swift in Sources */,
+				3C6B3DC52A33AEAF0099B4D6 /* SettingsView.swift in Sources */,
+				3C6B3DCA2A33AEAF0099B4D6 /* ListView.swift in Sources */,
+				3C6B3DBB2A33AE100099B4D6 /* FirebaseService.swift in Sources */,
+				3C1164DD2A338E4400963E6E /* App.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		3C1164E52A338E4500963E6E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		3C1164E62A338E4500963E6E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3C1164E82A338E4500963E6E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AAFA95A22E164A954E58586A /* Pods-basic birthdays app.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "basic birthdays app/basic birthdays app.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"basic birthdays app/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = XS39LRMUGT;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "basic-birthdays-app-Info.plist";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "union.io.basic-birthdays-app";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "basic birthdays app provisioning profile";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3C1164E92A338E4500963E6E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1F6F76D8B3F35BB20FD480EB /* Pods-basic birthdays app.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "basic birthdays app/basic birthdays app.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"basic birthdays app/Preview Content\"";
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = XS39LRMUGT;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "basic-birthdays-app-Info.plist";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "union.io.basic-birthdays-app";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "basic birthdays app provisioning profile";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3C1164D42A338E4400963E6E /* Build configuration list for PBXProject "basic birthdays app" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C1164E52A338E4500963E6E /* Debug */,
+				3C1164E62A338E4500963E6E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3C1164E72A338E4500963E6E /* Build configuration list for PBXNativeTarget "basic birthdays app" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C1164E82A338E4500963E6E /* Debug */,
+				3C1164E92A338E4500963E6E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3C1164F62A33994400963E6E /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3C1164F72A33994400963E6E /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3C1164F62A33994400963E6E /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 3C1164D12A338E4400963E6E /* Project object */;
+}
