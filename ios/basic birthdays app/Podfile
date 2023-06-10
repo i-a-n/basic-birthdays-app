@@ -1,0 +1,14 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '16.0'
+
+target 'basic birthdays app' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for basic birthdays app
+  pod 'FirebaseAuth'
+  pod 'FirebaseDatabase'
+  pod 'FirebaseMessaging'
+  pod 'FirebaseUI/Auth', '~> 13.0'
+  pod 'FirebaseUI/Phone', '~> 13.0'
+end
