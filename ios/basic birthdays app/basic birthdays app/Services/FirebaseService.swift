@@ -30,6 +30,45 @@ class FirebaseService: ObservableObject {
         try auth.signOut()
     }
     
+    
+    func setDeviceToken(token: String) {
+        guard let user = Auth.auth().currentUser else {
+            // User is not logged in
+            print("Failed to set device token because user wasn't logged in, weirdly")
+            return
+        }
+        
+        let usersRef = Database.database().reference().child("users")
+        let userRef = usersRef.child(user.uid)
+        
+        userRef.child("deviceToken").setValue(token) { error, _ in
+            if let error = error {
+                print("Failed to set device token: \(error.localizedDescription)")
+            } else {
+                print("Device token set successfully for user: \(token)")
+            }
+        }
+    }
+    
+    func setNotificationEnabled(isEnabled: Bool, completion: @escaping (Bool) -> Void) {
+        guard let user = Auth.auth().currentUser else {
+            // User is not logged in
+            print("Failed to set notifications because user wasn't logged in, weirdly")
+            return
+        }
+        let usersRef = Database.database().reference().child("users")
+        let userRef = usersRef.child(user.uid)
+        
+        userRef.child("notificationEnabled").setValue(isEnabled) { error, _ in
+            if let error = error {
+                print("Failed to set notificationEnabled value: \(error.localizedDescription)")
+                completion(false)
+            } else {
+                print("notificationEnabled value set successfully for user: \(user.uid)")
+                completion(true)
+            }
+        }
+    }
 
     func addOrUpdateFriend(friendID: String? = nil, name: String, year: Int?, month: Int, day: Int, completion: @escaping (Result<Void, Error>) -> Void) {
         guard let user = Auth.auth().currentUser else {
@@ -97,6 +136,11 @@ class FirebaseService: ObservableObject {
         return Auth.auth().currentUser?.uid
     }
     
+    func getMonthName(month: Int) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMMM"
+        return formatter.monthSymbols[month - 1].lowercased()
+    }
 
     func getUserFriends(completion: @escaping ([Friend]) -> Void) {
         guard let userID = FirebaseService.shared.getCurrentUserID() else {
@@ -118,12 +162,14 @@ class FirebaseService: ObservableObject {
                     let month = friendDict["month"] as? Int
                     let id = childSnapshot.key
                     
+                    let birthdayMonth = self.getMonthName(month: month ?? 0) // Get the month name
+
                     print("friend \(friendDict)")
                     
                     if friendDict["year"] == nil {
-                        friends.append(Friend(name: name, year: 0, day: day ?? 0, month: month ?? 0, fbId: id))
+                        friends.append(Friend(name: name, year: 0, day: day ?? 0, month: month ?? 0, monthNameForGrouping: birthdayMonth, fbId: id))
                     } else {
-                        friends.append(Friend(name: name, year: friendDict["year"] as? Int, day: day ?? 0, month: month ?? 0, fbId: id))
+                        friends.append(Friend(name: name, year: friendDict["year"] as? Int, day: day ?? 0, month: month ?? 0, monthNameForGrouping: birthdayMonth, fbId: id))
                     }
                 }
             }

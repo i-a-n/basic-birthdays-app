@@ -24,6 +24,7 @@
 		3C6B3DCA2A33AEAF0099B4D6 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B3DC32A33AEAF0099B4D6 /* ListView.swift */; };
 		3C6B3DCB2A33AEAF0099B4D6 /* AddFriendForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B3DC42A33AEAF0099B4D6 /* AddFriendForm.swift */; };
 		3C6B3DCD2A33AEF10099B4D6 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B3DCC2A33AEF10099B4D6 /* LoginViewModel.swift */; };
+		3C6B3DD12A37CC810099B4D6 /* CalendarObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B3DD02A37CC810099B4D6 /* CalendarObserver.swift */; };
 		F3B681E3E829CC4ADEEFCBB4 /* Pods_basic_birthdays_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B3F048146EB09D0D3444068 /* Pods_basic_birthdays_app.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +49,7 @@
 		3C6B3DC32A33AEAF0099B4D6 /* ListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		3C6B3DC42A33AEAF0099B4D6 /* AddFriendForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendForm.swift; sourceTree = "<group>"; };
 		3C6B3DCC2A33AEF10099B4D6 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		3C6B3DD02A37CC810099B4D6 /* CalendarObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarObserver.swift; sourceTree = "<group>"; };
 		4B3F048146EB09D0D3444068 /* Pods_basic_birthdays_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_basic_birthdays_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAFA95A22E164A954E58586A /* Pods-basic birthdays app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-basic birthdays app.debug.xcconfig"; path = "Target Support Files/Pods-basic birthdays app/Pods-basic birthdays app.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				3C6B3DBA2A33AE100099B4D6 /* FirebaseService.swift */,
+				3C6B3DD02A37CC810099B4D6 /* CalendarObserver.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				3C6B3DB92A33ADF60099B4D6 /* Friend.swift in Sources */,
 				3C6B3DC62A33AEAF0099B4D6 /* CalendarView.swift in Sources */,
 				3C6B3DC72A33AEAF0099B4D6 /* NavigationBarView.swift in Sources */,
+				3C6B3DD12A37CC810099B4D6 /* CalendarObserver.swift in Sources */,
 				3C6B3DC82A33AEAF0099B4D6 /* LoginView.swift in Sources */,
 				3C6B3DC92A33AEAF0099B4D6 /* ViewAndEditBirthdaysView.swift in Sources */,
 				3C6B3DBD2A33AE3A0099B4D6 /* ViewAndEditBirthdaysViewModel.swift in Sources */,

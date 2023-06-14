@@ -13,6 +13,7 @@ struct Friend: Identifiable {
     let year: Int?
     let day: Int
     let month: Int
+    let monthNameForGrouping: String?
     let fbId: String?
 }
 
@@ -22,4 +23,5 @@ enum ActiveView {
     case add
     case settings
     case nothing
+    case birthdayView
 }

@@ -1,7 +1,33 @@
 import Foundation
 
 class ViewAndEditBirthdaysViewModel: ObservableObject {
-    @Published var friends: [Friend] = []
+    
+
+    @Published var friends: [Friend] = [] {
+        didSet {
+            // Call reloadCalendar() to trigger a reload of the calendar view
+            print("gonna reload nnao")
+            notifyCalendarObservers()
+        }
+    }
+    
+    // all of this just to reload a damn calendar
+    private var calendarObservers = NSHashTable<AnyObject>.weakObjects()
+
+    func registerCalendarObserver(_ observer: CalendarObserver) {
+        calendarObservers.add(observer)
+    }
+
+    func unregisterCalendarObserver(_ observer: CalendarObserver) {
+        calendarObservers.remove(observer)
+    }
+    
+    private func notifyCalendarObservers() {
+        print("calendarObservers: \(calendarObservers.allObjects)")
+        calendarObservers.allObjects.forEach { observer in
+            (observer as? CalendarObserver)?.calendarDataDidChange()
+        }
+    }
     
     func loadFriends() {
         FirebaseService.shared.getUserFriends { [weak self] friends in
@@ -60,6 +86,21 @@ class ViewAndEditBirthdaysViewModel: ObservableObject {
         }
     }
 
+    func getAgeString(for friend: Friend, selectedDate: Date) -> String? {
+        if let year = friend.year {
+            
+            if year == 0 {
+                return nil
+            }
+            let calendar = Calendar.current
+            let currentYear = calendar.component(.year, from: selectedDate)
+            let age = currentYear - year
+            
+            return "turning \(age)"
+        } else {
+            return nil
+        }
+    }
     
     // Other ViewAndEditBirthdaysViewModel methods...
 }

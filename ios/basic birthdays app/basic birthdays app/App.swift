@@ -5,8 +5,7 @@ import FirebaseAuthUI
 import FirebaseMessaging
 
 class AppDelegate: NSObject, UIApplicationDelegate, FUIAuthDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
-  func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
     FirebaseApp.configure()
       
       // auth
@@ -21,44 +20,48 @@ class AppDelegate: NSObject, UIApplicationDelegate, FUIAuthDelegate, UNUserNotif
       
       // notifications
       // Request authorization for user notifications
-      UNUserNotificationCenter.current().delegate = self
-      let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-      UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { granted, error in
-          if let error = error {
-              print("Failed to request authorization for user notifications: \(error.localizedDescription)")
-          } else {
-              print("Authorization for user notifications granted: \(granted)")
-          }
-      }
-      
-      // Register for remote notifications
-      application.registerForRemoteNotifications()
+//      UNUserNotificationCenter.current().delegate = self
+//      let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+//      UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { granted, error in
+//          if let error = error {
+//              print("Failed to request authorization for user notifications: \(error.localizedDescription)")
+//          } else {
+//              print("Authorization for user notifications granted: \(granted)")
+//          }
+//      }
+//      
+//      // Register for remote notifications
+//      application.registerForRemoteNotifications()
+//      Messaging.messaging().delegate = self
       Messaging.messaging().delegate = self
-
-
+           
     return true
   }
+    // helper method that serttingsview.swift will call
+    func registerForRemoteNotifications() {
+        UIApplication.shared.registerForRemoteNotifications()
+    }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        // auth
-        if let auth = FUIAuth.defaultAuthUI()?.auth {
-            auth.setAPNSToken(deviceToken, type: .sandbox)
-        }
-        
-        // messaging
-        let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
-        let token = tokenParts.joined()
-        print("Device token: \(token)")
-        
+//        // auth
+//        if let auth = FUIAuth.defaultAuthUI()?.auth {
+//            auth.setAPNSToken(deviceToken, type: .sandbox)
+//        }
+//
+//        // messaging
+//        let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
+//        let token = tokenParts.joined()
+//        print("Device token: \(token)")
+//
         // Pass the device token to Firebase Cloud Messaging
         Messaging.messaging().apnsToken = deviceToken
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        if let auth = FUIAuth.defaultAuthUI()?.auth {
-            auth.canHandleNotification(userInfo)
-        }
-        
+//        if let auth = FUIAuth.defaultAuthUI()?.auth {
+//            auth.canHandleNotification(userInfo)
+//        }
+//
         //debug
         print("Received remote notification: \(userInfo)")
     }
@@ -80,8 +83,9 @@ class AppDelegate: NSObject, UIApplicationDelegate, FUIAuthDelegate, UNUserNotif
         
         // Use the registration token as needed
         // For example, send it to your server to associate it with the user
+        FirebaseService.shared.setDeviceToken(token: token)
+
     }
-    
     
 }
 
@@ -89,11 +93,13 @@ class AppDelegate: NSObject, UIApplicationDelegate, FUIAuthDelegate, UNUserNotif
 struct YourAppNameApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject private var loginViewModel = LoginViewModel()
+
     
     var body: some Scene {
         WindowGroup {
             MainView()
                 .environmentObject(loginViewModel)
+
         }
     }
 }

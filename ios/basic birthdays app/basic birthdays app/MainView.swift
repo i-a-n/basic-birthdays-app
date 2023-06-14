@@ -9,6 +9,7 @@ import SwiftUI
 import FirebaseAuth
 
 struct MainView: View {
+
     @StateObject private var viewModel = ViewAndEditBirthdaysViewModel()
     @State private var isLoggedIn = false
     @State private var activeView: ActiveView = .calendar

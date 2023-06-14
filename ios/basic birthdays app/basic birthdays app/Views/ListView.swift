@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ListView: View {
     @EnvironmentObject var viewModel: ViewAndEditBirthdaysViewModel
-    @State private var selectedSortOption: SortOption = .name
+    @State private var selectedSortOption: SortOption = .birthday
 
     
     enum SortOption {
@@ -21,8 +21,8 @@ struct ListView: View {
             NavigationView {
                 VStack {
                     Picker("sort option", selection: $selectedSortOption) {
-                        Text("sort by name").tag(SortOption.name)
                         Text("sort by birthday").tag(SortOption.birthday)
+                        Text("sort by name").tag(SortOption.name)
                     }
                     .pickerStyle(SegmentedPickerStyle()).padding()
 
