@@ -6,72 +6,108 @@
 //
 
 import SwiftUI
+import FirebaseMessaging
 
 struct SettingsView: View {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
     @AppStorage("NotificationEnabled") private var notificationEnabled = false
     @State private var showAlert = false
 
     var body: some View {
         VStack {
-            Section() {
-                Toggle("Weekly Notifications", isOn: $notificationEnabled)
-                    .onChange(of: notificationEnabled) { newValue in
-                        UserDefaults.standard.set(newValue, forKey: "NotificationEnabled")
-                        if newValue {
-                            // Request authorization and configure notifications
-                            requestNotificationAuthorization()
-                        } else {
-                            // Disable notifications
-                            disableNotifications()
+            Toggle("weekly notifications", isOn: $notificationEnabled)
+                .onChange(of: notificationEnabled) { newValue in
+                    if newValue {
+                        requestNotificationAuthorization { granted in
+                            if granted {
+                                // Authorization granted, configure and schedule notifications
+                                configureNotifications()
+                            } else {
+                                // Authorization denied or error occurred
+                                // Handle accordingly
+                                DispatchQueue.main.async {
+                                    notificationEnabled = false
+                                    showAlert = true
+                                }
+                            }
+                        }
+                    } else {
+                        disableNotifications {
+                            // Notifications disabled, handle accordingly
                         }
                     }
-                    .padding()
-            }
-            .alert(isPresented: $showAlert) {
+                }
+                .padding()
+            Text("receive exactly one (1) notification each monday, only if a friend has a birthday that week").font(.system(size: 14)).padding()
+
+            Spacer()
+
+            }.alert(isPresented: $showAlert) {
                 Alert(
-                    title: Text("Notifications Disabled"),
-                    message: Text("Please enable notifications for this app in Settings."),
-                    primaryButton: .default(Text("Settings"), action: goToSettings),
+                    title: Text("notifications disabled"),
+                    message: Text("please enable notifications for this app in your device settings."),
+                    primaryButton: .default(Text("settings"), action: goToSettings),
                     secondaryButton: .cancel()
                 )
             }
-            Spacer()
         }
-    }
 
     // Function to request notification authorization
-    private func requestNotificationAuthorization() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+    private func requestNotificationAuthorization(completion: @escaping (Bool) -> Void) {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { [self] granted, error in
             if granted {
-                // Authorization granted, configure and schedule notifications
-                configureNotifications()
-            } else {
-                // Authorization denied or error occurred
-                // Handle accordingly
-                print("let's pop up an alert")
                 DispatchQueue.main.async {
-                    notificationEnabled = false
-                    showAlert = true
-
+//                    self?.registerForRemoteNotifications()
+                    appDelegate.registerForRemoteNotifications()
+                    // Messaging.messaging().delegate = self
+                    self.didRegisterForRemoteNotifications(with: Data())
                 }
+            }
+            completion(granted)
+        }
+    }
+    
+    func didRegisterForRemoteNotifications(with deviceToken: Data) {
+        // auth
+//        if let auth = FUIAuth.defaultAuthUI()?.auth {
+//            auth.setAPNSToken(deviceToken, type: .sandbox)
+//        }
+        
+        // messaging
+        let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
+        let token = tokenParts.joined()
+        print("Device token: \(token)")
+        
+        // Pass the device token to Firebase Cloud Messaging
+        Messaging.messaging().apnsToken = deviceToken
+    }
+
+    // Function to configure notifications
+    private func configureNotifications() {
+        FirebaseService.shared.setNotificationEnabled(isEnabled: true) { success in
+            if success {
+                // Notifications enabled in Firebase, proceed with further configuration
+                // ...
+            } else {
+                // Failed to enable notifications in Firebase, handle accordingly
             }
         }
     }
 
-
-    // Function to configure notifications
-    private func configureNotifications() {
-        // Implement your code to configure and schedule notifications
-        // based on the desired logic for weekly notifications
-        print("configure notifications")
-        scheduleWeeklyNotificationTrigger()
-    }
-
     // Function to disable notifications
-    private func disableNotifications() {
-        // Implement your code to disable or remove any scheduled notifications
-        print("un-configure notifications?")
+    private func disableNotifications(completion: @escaping () -> Void) {
+        FirebaseService.shared.setNotificationEnabled(isEnabled: false) { success in
+            if success {
+                // Notifications disabled in Firebase, proceed with further actions
+                // ...
+            } else {
+                // Failed to disable notifications in Firebase, handle accordingly
+            }
+            completion()
+        }
     }
+
     
     private func goToSettings() {
         guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else { return }
@@ -80,68 +116,6 @@ struct SettingsView: View {
         }
     }
     
-    private func scheduleWeeklyNotificationTrigger() {
-        let calendar = Calendar.current
-        var dateComponents = DateComponents()
-        dateComponents.weekday = 5 // Monday
-        dateComponents.hour = 10
-        dateComponents.minute = 1
-
-        guard let nextMonday = calendar.nextDate(after: Date(), matching: dateComponents, matchingPolicy: .nextTime) else {
-            return
-        }
-
-        let trigger = UNCalendarNotificationTrigger(dateMatching: calendar.dateComponents([.weekday, .hour, .minute], from: nextMonday), repeats: true)
-        let request = UNNotificationRequest(identifier: "WeeklyNotificationTrigger", content: UNMutableNotificationContent(), trigger: trigger)
-
-        UNUserNotificationCenter.current().add(request) { error in
-            if let error = error {
-                print("Failed to schedule weekly notification trigger: \(error.localizedDescription)")
-            } else {
-                print("Weekly notification trigger scheduled for Monday at 12:00 AM.")
-            }
-        }
-    }
-    
-    private func evaluateWeeklyNotification() {
-        // Create the notification content
-        let content = UNMutableNotificationContent()
-        content.title = "Weekly Notification"
-        content.body = "This is your weekly notification message."
-        content.sound = .default
-
-        // Configure the notification trigger for 8 AM
-        var dateComponents = DateComponents()
-        dateComponents.weekday = 5 // Monday
-        dateComponents.hour = 10
-        dateComponents.minute = 2
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-
-        // Create the request identifier
-        let requestIdentifier = "WeeklyNotification"
-
-        // Create the notification request
-        let request = UNNotificationRequest(identifier: requestIdentifier, content: content, trigger: trigger)
-
-        // Check if the condition is true before scheduling the notification
-        let isConditionMet = true // Replace with your own logic to determine if the condition is met
-        if isConditionMet {
-            // Schedule the notification
-            UNUserNotificationCenter.current().add(request) { error in
-                if let error = error {
-                    // Failed to schedule the notification
-                    print("Failed to schedule notification: \(error.localizedDescription)")
-                } else {
-                    // Notification scheduled successfully
-                    print("Weekly notification scheduled.")
-                }
-            }
-        } else {
-            // Remove any previously scheduled notification with the same request identifier
-            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [requestIdentifier])
-            print("Weekly notification canceled.")
-        }
-    }
 
 }
 

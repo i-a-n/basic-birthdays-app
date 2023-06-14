@@ -20,10 +20,19 @@ struct AddFriendForm: View {
 
     @State private var selectedYear: Int?
     
-    var editFriend: Friend?
     
-    init(editFriend: Friend? = nil) {
+    private enum Field: Int, CaseIterable {
+            case name
+        }
+    @FocusState private var focusedField: Field?
+
+    
+    var editFriend: Friend?
+    var hideClearForm: Bool?
+
+    init(editFriend: Friend? = nil, hideClearForm: Bool? = false) {
         self.editFriend = editFriend
+        self.hideClearForm = hideClearForm
 
         if let friend = editFriend {
             _name = State(initialValue: friend.name)
@@ -35,8 +44,10 @@ struct AddFriendForm: View {
     
     var body: some View {
         Form {
-            Section {
+            Section(header: Text("name")) {
                 TextField("name", text: $name)
+                    .focused($focusedField, equals: .name)
+                    .textFieldStyle(.roundedBorder)
             }
             
             Section(header: Text("birthday")) {
@@ -55,11 +66,11 @@ struct AddFriendForm: View {
                     }
                 }
                 
-                Picker("Year", selection: $selectedYear) {
+                Picker("year", selection: $selectedYear) {
                     let currentYear = Calendar.current.component(.year, from: Date())
                     let years = (1900...currentYear).reversed().map { String($0) }
                     
-                    Text("No Year")
+                    Text("no year")
                         .tag(nil as Int?)
                     
                     ForEach(years, id: \.self) { year in
@@ -72,20 +83,40 @@ struct AddFriendForm: View {
             }
             Section {
                 HStack {
-                    Button("add friend") {
-                        submitForm()
-                    }.buttonStyle(.borderedProminent)
-                    
+                    Spacer()
                     if let friendID = editFriend?.fbId {
                         Button("delete friend") {
                             deleteFriend(friendID: friendID)
-                        }.buttonStyle(.bordered)
+                        }.buttonStyle(.borderless).padding([.trailing], 16)
+                        Button("update friend") {
+                            submitForm()
+                        }.buttonStyle(.borderedProminent)
+                    } else {
+                        if !(hideClearForm ?? false) {
+                            Button("clear form") {
+                                name = ""
+                                selectedMonth = 1
+                                day = 1
+                                selectedYear = nil
+                            }.buttonStyle(.borderless).padding([.trailing], 16)
+                        }
+                        Button("add friend") {
+                            submitForm()
+                        }.buttonStyle(.borderedProminent)
                     }
                 }
             }
+        }                   .toolbar {
+            ToolbarItem(placement: .keyboard) {
+                Button("done") {
+                    focusedField = nil
+                }
+            }
         }.alert(isPresented: $showAlert) {
-            Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+            Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("ok")))
         }
+        .scrollContentBackground(.hidden)
+
     }
     
     func showAlert(title: String, message: String) {
@@ -112,11 +143,11 @@ struct AddFriendForm: View {
             switch result {
             case .success:
                 // Friend added successfully
-                showAlert(title: "Success", message: "Friend removed successfully.")
+                showAlert(title: "success", message: "friend removed")
                 print("worked")
             case .failure(let error):
                 // Handle the error
-                showAlert(title: "Error", message: error.localizedDescription)
+                showAlert(title: "error", message: error.localizedDescription)
                 print("Failed to remove friend: \(error.localizedDescription)")
             }
         }
@@ -144,28 +175,28 @@ struct AddFriendForm: View {
                     day = 1
                     selectedYear = nil
                 }
-                showAlert(title: "Success", message: "Friend added/updated successfully.")
+                showAlert(title: "success", message: "friend added/updated")
                 print("worked")
             case .failure(let error):
                 // Handle the error
-                showAlert(title: "Error", message: error.localizedDescription)
+                showAlert(title: "error", message: error.localizedDescription)
                 print("Failed to add friend: \(error.localizedDescription)")
             }
         }
     }
 }
 
-struct ContentView: View {
-    var body: some View {
-        NavigationView {
-            AddFriendForm()
-                .navigationTitle("Add Friend")
-        }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
+//struct ContentView: View {
+//    var body: some View {
+//        NavigationView {
+//            AddFriendForm()
+//                .navigationTitle("add friend")
+//        }
+//    }
+//}
+//
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ContentView()
+//    }
+//}

@@ -37,9 +37,12 @@ struct LoginView: View {
                 let phoneProvider = FUIAuth.defaultAuthUI()?.providers.first as? FUIPhoneAuth
                 phoneProvider?.signIn(withPresenting: (UIApplication.shared.windows.first?.rootViewController)!, phoneNumber: nil)
             }) {
-                Text("Login with Phone")
+                Text("login with phone")
             }
+            .buttonStyle(.borderedProminent)
             .padding()
+            Text("your phone number is only used for logging you in. it will never be saved anywhere else or used for anything else, ever.").font(.system(size: 14)).multilineTextAlignment(.center).padding([.leading, .trailing], 28)
+
         }
         .onAppear {
             authDelegate.onLogin = onLogin
