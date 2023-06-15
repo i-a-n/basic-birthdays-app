@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke-width: 38px;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7 {
+        fill: none;
+        stroke: #000;
+      }
+
+      .cls-1, .cls-7 {
+        stroke-miterlimit: 10;
+      }
+
+      .cls-8 {
+        fill: #ccc;
+      }
+
+      .cls-2, .cls-3, .cls-4, .cls-5, .cls-6 {
+        stroke-linejoin: round;
+      }
+
+      .cls-2, .cls-5 {
+        stroke-width: 33px;
+      }
+
+      .cls-3 {
+        stroke-width: 31px;
+      }
+
+      .cls-3, .cls-4, .cls-5, .cls-6, .cls-7 {
+        stroke-linecap: round;
+      }
+
+      .cls-4 {
+        stroke-width: 34px;
+      }
+
+      .cls-6 {
+        stroke-width: 28px;
+      }
+
+      .cls-7 {
+        stroke-width: 52px;
+      }
+    </style>
+  </defs>
+  <g id="Layer_5" data-name="Layer 5">
+    <polyline class="cls-8" points="152.87 870.94 572.62 447.07 742.49 616.94 152.87 870.94"/>
+  </g>
+  <g id="Layer_4" data-name="Layer 4">
+    <polygon class="cls-7" points="166.35 857.44 729.01 615.06 407.97 294.01 166.35 857.44"/>
+    <path class="cls-4" d="m596.14,278.37c-24.06-87.65,45.21-74.03,102.47-127.22,36.38-45.98,4.13-69.3,4.13-69.3"/>
+    <path class="cls-4" d="m686.82,447.07c6.37-122.34,200.64,41.1,206.29-86.19"/>
+    <line class="cls-5" x1="258.35" y1="204.79" x2="258.35" y2="315.65"/>
+    <line class="cls-5" x1="200.54" y1="260.22" x2="316.17" y2="260.22"/>
+    <line class="cls-3" x1="833.51" y1="641.61" x2="833.51" y2="742.2"/>
+    <line class="cls-3" x1="783.35" y1="691.9" x2="883.66" y2="691.9"/>
+    <circle class="cls-6" cx="447.68" cy="139.56" r="30.34"/>
+    <circle cx="805.58" cy="245.25" r="40.46"/>
+    <circle class="cls-6" cx="832.25" cy="533.29" r="26.67"/>
+    <path class="cls-1" d="m309.53,795.76s55.96-59.02,58.92-118.92c2.95-59.91-14.09-101.11-14.09-101.11"/>
+    <path class="cls-2" d="m456.57,732.42s34.48-76.17,25.02-156.69c-9.45-80.52-33.91-109.9-33.91-109.9"/>
+  </g>
+</svg>

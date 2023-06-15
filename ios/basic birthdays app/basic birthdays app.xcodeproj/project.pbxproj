@@ -11,20 +11,19 @@
 		3C1164DF2A338E4400963E6E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C1164DE2A338E4400963E6E /* MainView.swift */; };
 		3C1164E12A338E4500963E6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C1164E02A338E4500963E6E /* Assets.xcassets */; };
 		3C1164E42A338E4500963E6E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C1164E32A338E4500963E6E /* Preview Assets.xcassets */; };
-		3C1164EC2A3393A300963E6E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3C1164EB2A3393A300963E6E /* GoogleService-Info.plist */; };
 		3C1164F82A33994400963E6E /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 3C1164F72A33994400963E6E /* FSCalendar */; };
-		3C6B3DB92A33ADF60099B4D6 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B3DB82A33ADF60099B4D6 /* Friend.swift */; };
+		3C6B3DB92A33ADF60099B4D6 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B3DB82A33ADF60099B4D6 /* Models.swift */; };
 		3C6B3DBB2A33AE100099B4D6 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B3DBA2A33AE100099B4D6 /* FirebaseService.swift */; };
 		3C6B3DBD2A33AE3A0099B4D6 /* ViewAndEditBirthdaysViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B3DBC2A33AE3A0099B4D6 /* ViewAndEditBirthdaysViewModel.swift */; };
 		3C6B3DC52A33AEAF0099B4D6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B3DBE2A33AEAF0099B4D6 /* SettingsView.swift */; };
 		3C6B3DC62A33AEAF0099B4D6 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B3DBF2A33AEAF0099B4D6 /* CalendarView.swift */; };
 		3C6B3DC72A33AEAF0099B4D6 /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B3DC02A33AEAF0099B4D6 /* NavigationBarView.swift */; };
 		3C6B3DC82A33AEAF0099B4D6 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B3DC12A33AEAF0099B4D6 /* LoginView.swift */; };
-		3C6B3DC92A33AEAF0099B4D6 /* ViewAndEditBirthdaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B3DC22A33AEAF0099B4D6 /* ViewAndEditBirthdaysView.swift */; };
 		3C6B3DCA2A33AEAF0099B4D6 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B3DC32A33AEAF0099B4D6 /* ListView.swift */; };
 		3C6B3DCB2A33AEAF0099B4D6 /* AddFriendForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B3DC42A33AEAF0099B4D6 /* AddFriendForm.swift */; };
-		3C6B3DCD2A33AEF10099B4D6 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B3DCC2A33AEF10099B4D6 /* LoginViewModel.swift */; };
 		3C6B3DD12A37CC810099B4D6 /* CalendarObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B3DD02A37CC810099B4D6 /* CalendarObserver.swift */; };
+		3CE9D54D2A3A31AE0022D08B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CE9D54C2A3A31AE0022D08B /* GoogleService-Info.plist */; };
+		3CE9D5502A3A498C0022D08B /* DateUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9D54F2A3A498C0022D08B /* DateUtilities.swift */; };
 		F3B681E3E829CC4ADEEFCBB4 /* Pods_basic_birthdays_app.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B3F048146EB09D0D3444068 /* Pods_basic_birthdays_app.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,20 +35,19 @@
 		3C1164E02A338E4500963E6E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3C1164E32A338E4500963E6E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3C1164EA2A338E8500963E6E /* basic birthdays app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "basic birthdays app.entitlements"; sourceTree = "<group>"; };
-		3C1164EB2A3393A300963E6E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3C1164F92A339DE200963E6E /* basic-birthdays-app-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "basic-birthdays-app-Info.plist"; sourceTree = SOURCE_ROOT; };
-		3C6B3DB82A33ADF60099B4D6 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
+		3C6B3DB82A33ADF60099B4D6 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		3C6B3DBA2A33AE100099B4D6 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		3C6B3DBC2A33AE3A0099B4D6 /* ViewAndEditBirthdaysViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAndEditBirthdaysViewModel.swift; sourceTree = "<group>"; };
 		3C6B3DBE2A33AEAF0099B4D6 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3C6B3DBF2A33AEAF0099B4D6 /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		3C6B3DC02A33AEAF0099B4D6 /* NavigationBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
 		3C6B3DC12A33AEAF0099B4D6 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		3C6B3DC22A33AEAF0099B4D6 /* ViewAndEditBirthdaysView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewAndEditBirthdaysView.swift; sourceTree = "<group>"; };
 		3C6B3DC32A33AEAF0099B4D6 /* ListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		3C6B3DC42A33AEAF0099B4D6 /* AddFriendForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendForm.swift; sourceTree = "<group>"; };
-		3C6B3DCC2A33AEF10099B4D6 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		3C6B3DD02A37CC810099B4D6 /* CalendarObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarObserver.swift; sourceTree = "<group>"; };
+		3CE9D54C2A3A31AE0022D08B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3CE9D54F2A3A498C0022D08B /* DateUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtilities.swift; sourceTree = "<group>"; };
 		4B3F048146EB09D0D3444068 /* Pods_basic_birthdays_app.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_basic_birthdays_app.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAFA95A22E164A954E58586A /* Pods-basic birthdays app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-basic birthdays app.debug.xcconfig"; path = "Target Support Files/Pods-basic birthdays app/Pods-basic birthdays app.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -88,6 +86,7 @@
 		3C1164DB2A338E4400963E6E /* basic birthdays app */ = {
 			isa = PBXGroup;
 			children = (
+				3CE9D54E2A3A497F0022D08B /* Utilities */,
 				3C6B3DB72A33ADE40099B4D6 /* Views */,
 				3C6B3DB62A33ADDD0099B4D6 /* ViewModels */,
 				3C6B3DB52A33ADD80099B4D6 /* Services */,
@@ -96,7 +95,7 @@
 				3C1164EA2A338E8500963E6E /* basic birthdays app.entitlements */,
 				3C1164DC2A338E4400963E6E /* App.swift */,
 				3C1164DE2A338E4400963E6E /* MainView.swift */,
-				3C1164EB2A3393A300963E6E /* GoogleService-Info.plist */,
+				3CE9D54C2A3A31AE0022D08B /* GoogleService-Info.plist */,
 				3C1164E02A338E4500963E6E /* Assets.xcassets */,
 				3C1164E22A338E4500963E6E /* Preview Content */,
 			);
@@ -114,7 +113,7 @@
 		3C6B3DB42A33ADCF0099B4D6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				3C6B3DB82A33ADF60099B4D6 /* Friend.swift */,
+				3C6B3DB82A33ADF60099B4D6 /* Models.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -132,7 +131,6 @@
 			isa = PBXGroup;
 			children = (
 				3C6B3DBC2A33AE3A0099B4D6 /* ViewAndEditBirthdaysViewModel.swift */,
-				3C6B3DCC2A33AEF10099B4D6 /* LoginViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -146,9 +144,16 @@
 				3C6B3DC12A33AEAF0099B4D6 /* LoginView.swift */,
 				3C6B3DC02A33AEAF0099B4D6 /* NavigationBarView.swift */,
 				3C6B3DBE2A33AEAF0099B4D6 /* SettingsView.swift */,
-				3C6B3DC22A33AEAF0099B4D6 /* ViewAndEditBirthdaysView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		3CE9D54E2A3A497F0022D08B /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				3CE9D54F2A3A498C0022D08B /* DateUtilities.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		BF554321F8CFF425B84AB245 /* Frameworks */ = {
@@ -235,8 +240,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C1164E42A338E4500963E6E /* Preview Assets.xcassets in Resources */,
+				3CE9D54D2A3A31AE0022D08B /* GoogleService-Info.plist in Resources */,
 				3C1164E12A338E4500963E6E /* Assets.xcassets in Resources */,
-				3C1164EC2A3393A300963E6E /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,20 +294,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C6B3DB92A33ADF60099B4D6 /* Friend.swift in Sources */,
+				3C6B3DB92A33ADF60099B4D6 /* Models.swift in Sources */,
 				3C6B3DC62A33AEAF0099B4D6 /* CalendarView.swift in Sources */,
 				3C6B3DC72A33AEAF0099B4D6 /* NavigationBarView.swift in Sources */,
 				3C6B3DD12A37CC810099B4D6 /* CalendarObserver.swift in Sources */,
 				3C6B3DC82A33AEAF0099B4D6 /* LoginView.swift in Sources */,
-				3C6B3DC92A33AEAF0099B4D6 /* ViewAndEditBirthdaysView.swift in Sources */,
 				3C6B3DBD2A33AE3A0099B4D6 /* ViewAndEditBirthdaysViewModel.swift in Sources */,
 				3C1164DF2A338E4400963E6E /* MainView.swift in Sources */,
 				3C6B3DCB2A33AEAF0099B4D6 /* AddFriendForm.swift in Sources */,
-				3C6B3DCD2A33AEF10099B4D6 /* LoginViewModel.swift in Sources */,
 				3C6B3DC52A33AEAF0099B4D6 /* SettingsView.swift in Sources */,
 				3C6B3DCA2A33AEAF0099B4D6 /* ListView.swift in Sources */,
 				3C6B3DBB2A33AE100099B4D6 /* FirebaseService.swift in Sources */,
 				3C1164DD2A338E4400963E6E /* App.swift in Sources */,
+				3CE9D5502A3A498C0022D08B /* DateUtilities.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,6 +444,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "basic-birthdays-app-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = birthdays;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -477,6 +482,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "basic-birthdays-app-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = birthdays;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
