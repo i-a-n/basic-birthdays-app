@@ -32,23 +32,29 @@ class AppDelegate: NSObject, UIApplicationDelegate, FUIAuthDelegate,
   func application(
     _ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
   ) {
+    if let auth = FUIAuth.defaultAuthUI()?.auth {
+        auth.setAPNSToken(deviceToken, type: .unknown)
+    }
     Messaging.messaging().apnsToken = deviceToken
   }
 
   // for debugging. uncomment to see console messaging.
-  // func application(
-  //   _ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error
-  // ) {
-  //   print("Failed to register for remote notifications with error: \(error.localizedDescription)")
-  // }
+   func application(
+     _ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error
+   ) {
+     print("Failed to register for remote notifications with error: \(error.localizedDescription)")
+   }
 
   // for debugging. uncomment to see console messaging.
-  // func application(
-  //   _ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
-  //   fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
-  // ) {
-  //   print("Received remote notification: \(userInfo)")
-  // }
+   func application(
+     _ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
+   ) {
+  if let auth = FUIAuth.defaultAuthUI()?.auth {
+      auth.canHandleNotification(userInfo)
+  }
+     print("Received remote notification: \(userInfo)")
+   }
 
   // for auth flow. I believe this is part of the "captcha" redirects/callbacks.
   func application(
