@@ -12,6 +12,7 @@
 import FirebaseAuth
 import FirebaseCore
 import FirebaseDatabase
+import FirebaseMessaging
 import Foundation
 
 class FirebaseService: ObservableObject {
@@ -42,8 +43,9 @@ class FirebaseService: ObservableObject {
     return Auth.auth().currentUser?.uid
   }
 
-  // This takes the device token and just sets it in a `deviceToken` key within the user's
-  // userID object in firebase
+  // given a deviceToken, this function will search the user's firebase object for the
+  // same token. if it's found, it will refresh the timestamp there. if it's not found,
+  // it'll make a new object for this token. we should prune old tokens periodically.
   func setDeviceToken(token: String) {
     guard let user = Auth.auth().currentUser else {
       // User is not logged in
@@ -54,15 +56,32 @@ class FirebaseService: ObservableObject {
     let usersRef = db.child("users")
     let userRef = usersRef.child(user.uid)
 
-    userRef.child("deviceToken").setValue(token) { error, _ in
-      if let error = error {
-        print("Failed to set device token: \(error.localizedDescription)")
+    let timestamp = Date().timeIntervalSince1970
+
+    let deviceTokensRef = userRef.child("deviceTokens")
+
+    // Check if the token already exists
+    deviceTokensRef.queryOrdered(byChild: "token").queryEqual(toValue: token).observeSingleEvent(
+      of: .value
+    ) { snapshot in
+      if snapshot.exists() {
+        for case let tokenSnapshot as DataSnapshot in snapshot.children {
+          let tokenRef = deviceTokensRef.child(tokenSnapshot.key)
+          tokenRef.child("timestamp").setValue(timestamp)
+        }
       } else {
-        print("Device token set successfully for user: \(token)")
+        let newTokenRef = deviceTokensRef.childByAutoId()
+        let tokenData: [String: Any] = [
+          "token": token,
+          "timestamp": timestamp,
+        ]
+        newTokenRef.setValue(tokenData)
       }
     }
   }
 
+  // this will set `notificationEnabled` for the user's device, either `true` or `false`.
+  // it will fail if it can't find the current `deviceToken` within the user's deviceTokens.
   func setNotificationEnabled(isEnabled: Bool, completion: @escaping (Bool) -> Void) {
     guard let user = Auth.auth().currentUser else {
       // User is not logged in
@@ -70,18 +89,42 @@ class FirebaseService: ObservableObject {
       return
     }
 
+    // note that we get the deviceToken via `Messaging.messaging().fcmToken`, which is a
+    // poorly-documented method that I found myself. it seems to work but if we start
+    // seeing buginess around setting `notificationEnabled`, this is one potential source of
+    // concern.
+    guard let deviceToken = Messaging.messaging().fcmToken else {
+      // Device token is not available
+      print("Failed to set notifications because device token is not available")
+      return
+    }
+
     let usersRef = db.child("users")
     let userRef = usersRef.child(user.uid)
+    let deviceTokensRef = userRef.child("deviceTokens")
 
-    userRef.child("notificationEnabled").setValue(isEnabled) { error, _ in
-      if let error = error {
-        print("Failed to set notificationEnabled value: \(error.localizedDescription)")
-        completion(false)
-      } else {
-        print("notificationEnabled value set successfully for user: \(user.uid)")
-        completion(true)
+    deviceTokensRef.queryOrdered(byChild: "token")
+      .queryEqual(toValue: deviceToken)
+      .observeSingleEvent(of: .value) { snapshot in
+        if let deviceTokenSnapshot = snapshot.children.allObjects.first as? DataSnapshot {
+          // Found the matching device token
+          let deviceTokenId = deviceTokenSnapshot.key
+          let deviceTokenRef = deviceTokensRef.child(deviceTokenId)
+          deviceTokenRef.child("notificationEnabled").setValue(isEnabled) { error, _ in
+            if let error = error {
+              print("Failed to set notificationEnabled value: \(error.localizedDescription)")
+              completion(false)
+            } else {
+              print("notificationEnabled value set successfully for device token: \(deviceTokenId)")
+              completion(true)
+            }
+          }
+        } else {
+          // Device token not found
+          print("Failed to find device token in the database")
+          completion(false)
+        }
       }
-    }
   }
 
   func addOrUpdateFriend(
@@ -147,12 +190,6 @@ class FirebaseService: ObservableObject {
         completion(.success(()))
       }
     }
-  }
-
-  func getMonthName(month: Int) -> String {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "MMMM"
-    return formatter.monthSymbols[month - 1].lowercased()
   }
 
   func getUserFriends(completion: @escaping ([Friend]) -> Void) {

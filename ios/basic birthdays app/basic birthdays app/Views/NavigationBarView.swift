@@ -1,29 +1,27 @@
 //
-//  NavigationBarView.swift
-//  dead simple birthdays
+// NavigationBarView.swift
+// basic birthdays app
 //
-//  Created by ian on 6/4/23.
+// notes:
 //
 
 import SwiftUI
 
 struct NavigationBarView: View {
-    var body: some View {
-        HStack {
-            // Add your app's logo or any other elements you want to display in the navigation bar
-            // Example: Image("logo")
-            Text("basic")
-                .fontWeight(.bold)
-                .font(.system(size: 17, weight: .bold, design: .default))
-                .foregroundColor(Color(UIColor.darkText))
+  var body: some View {
+    HStack {
+      Text("basic")
+        .fontWeight(.bold)
+        .font(.system(size: 17, weight: .bold, design: .default))
+        .foregroundColor(Color(UIColor.darkText))
 
-            Spacer()
+      Spacer()
 
-            Text("birthdays app")
-                .font(.system(size: 17, weight: .regular, design: .default))
-                .foregroundColor(Color(UIColor.darkText))
-        }
-        .padding()
-        .background(Color(UIColor.systemGray6))
+      Text("birthdays app")
+        .font(.system(size: 17, weight: .regular, design: .default))
+        .foregroundColor(Color(UIColor.darkText))
     }
+    .padding()
+    .background(Color(UIColor.systemGray6))
+  }
 }

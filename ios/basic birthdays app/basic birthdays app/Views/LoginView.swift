@@ -1,8 +1,8 @@
 //
-//  LoginView.swift
-//  dead simple birthdays
+// LoginView.swift
+// basic birthdays app
 //
-//  Created by ian on 6/3/23.
+// notes:
 //
 
 import FirebasePhoneAuthUI
@@ -13,26 +13,23 @@ class LoginViewAuthDelegate: NSObject, FUIAuthDelegate {
 
   func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
     if let user = authDataResult?.user {
-      // Authentication successful
-      // Handle the authenticated user, perform necessary actions, etc.
-      onLogin?()  // Call the provided onLogin closure
-      print("logged in")
+      // auth successful, call the function MainView provided
+      onLogin?()
     } else {
-      // Authentication failed
-      // Handle the error
-      print("NOT logged in")
+      // auth failed
+      // TODO: display this in the MainView.swift view
+      print("error logging in: \(error)")
     }
   }
 }
 
 struct LoginView: View {
-  var onLogin: (() -> Void)  // Add the onLogin closure
+  var onLogin: (() -> Void)
   private let authDelegate = LoginViewAuthDelegate()
 
   var body: some View {
     VStack {
       Button(action: {
-        // Perform Firebase Phone Authentication
         let phoneProvider = FUIAuth.defaultAuthUI()?.providers.first as? FUIPhoneAuth
         phoneProvider?.signIn(
           withPresenting: (UIApplication.shared.windows.first?.rootViewController)!,

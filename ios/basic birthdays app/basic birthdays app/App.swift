@@ -13,69 +13,44 @@ class AppDelegate: NSObject, UIApplicationDelegate, FUIAuthDelegate,
   ) -> Bool {
     FirebaseApp.configure()
 
-    // auth
+    // init auth (FirebaseAuthUI)
     let authUI = FUIAuth.defaultAuthUI()
 
     let providers: [FUIAuthProvider] = [
       FUIPhoneAuth(authUI: FUIAuth.defaultAuthUI()!)
     ]
     authUI?.providers = providers
-    // You need to adopt a FUIAuthDelegate protocol to receive callback
     authUI?.delegate = self
 
-    // notifications
-    // Request authorization for user notifications
-    //      UNUserNotificationCenter.current().delegate = self
-    //      let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-    //      UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { granted, error in
-    //          if let error = error {
-    //              print("Failed to request authorization for user notifications: \(error.localizedDescription)")
-    //          } else {
-    //              print("Authorization for user notifications granted: \(granted)")
-    //          }
-    //      }
-    //
-    //      // Register for remote notifications
-    //      application.registerForRemoteNotifications()
-    //      Messaging.messaging().delegate = self
+    // init messaging (Firebase Cloud Messaging)
     Messaging.messaging().delegate = self
 
     return true
   }
-  // helper method that serttingsview.swift will call
-  func registerForRemoteNotifications() {
-    UIApplication.shared.registerForRemoteNotifications()
-  }
 
+  // this is called when a user enables notifications on the system
   func application(
     _ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
   ) {
-    //        // auth
-    //        if let auth = FUIAuth.defaultAuthUI()?.auth {
-    //            auth.setAPNSToken(deviceToken, type: .sandbox)
-    //        }
-    //
-    //        // messaging
-    //        let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
-    //        let token = tokenParts.joined()
-    //        print("Device token: \(token)")
-    //
-    // Pass the device token to Firebase Cloud Messaging
     Messaging.messaging().apnsToken = deviceToken
   }
 
-  func application(
-    _ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
-    fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
-  ) {
-    //        if let auth = FUIAuth.defaultAuthUI()?.auth {
-    //            auth.canHandleNotification(userInfo)
-    //        }
-    //
-    //debug
-    print("Received remote notification: \(userInfo)")
-  }
+  // for debugging. uncomment to see console messaging.
+  // func application(
+  //   _ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error
+  // ) {
+  //   print("Failed to register for remote notifications with error: \(error.localizedDescription)")
+  // }
 
+  // for debugging. uncomment to see console messaging.
+  // func application(
+  //   _ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+  //   fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
+  // ) {
+  //   print("Received remote notification: \(userInfo)")
+  // }
+
+  // for auth flow. I believe this is part of the "captcha" redirects/callbacks.
   func application(
     _ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any]
   ) -> Bool {
@@ -87,22 +62,33 @@ class AppDelegate: NSObject, UIApplicationDelegate, FUIAuthDelegate,
     return false
   }
 
+  // I'm led to believe that this is called every time the app starts, and may result in a new
+  // token for this device. it is unclear to me why we do not call
+  // `Messaging.messaging().apnsToken = deviceToken` here, but rather we call it a few lines
+  // above, in much more limited circumstances. however, this is what both the Firebase
+  // documentation and chatGPT recommended, so here we go.
+  //
+  // if we see major bugginess, with messages not being delivered to many users, this COULD
+  // be one source of the problem.
   func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
     guard let token = fcmToken else {
       return
     }
-    print("FCM registration token: \(token)")
 
-    // Use the registration token as needed
-    // For example, send it to your server to associate it with the user
     FirebaseService.shared.setDeviceToken(token: token)
+  }
 
+  // helper method that serttingsview.swift will call when a user enables notifications
+  func registerForRemoteNotifications() {
+    DispatchQueue.main.async {
+      UIApplication.shared.registerForRemoteNotifications()
+    }
   }
 
 }
 
 @main
-struct YourAppNameApp: App {
+struct BasicBirthdaysApp: App {
   @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
 
   var body: some Scene {
