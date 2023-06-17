@@ -1,8 +1,8 @@
 //
-//  CalendarView.swift
-//  WorkingWIthCalendars
+// CalendarView.swift
+// basic birthdays app
 //
-//  Created by Rupesh Chaudhari on 12/09/22.
+// notes: https://github.com/WenchaoD/FSCalendar
 //
 
 import FSCalendar
@@ -18,7 +18,77 @@ struct CalendarView: View {
 
   @Binding var activeView: ActiveView
 
-  private var filteredFriends: [Friend] {
+  var body: some View {
+    NavigationView {
+      VStack {
+        CalendarViewRepresentable(
+          selectedDate: $selectedDate, dateIsSelected: $dateIsSelected,
+          monthBeingViewed: $monthBeingViewed
+        )
+        .environmentObject(viewModel)
+        .sheet(
+          isPresented: $dateIsSelected,
+          content: {
+            NavigationView {  // Wrap the VStack in a NavigationView
+              VStack {
+                Text(selectedDate.formatted(.dateTime.day().month(.wide).year())).font(.title)
+                  .textCase(.lowercase).padding()
+                Spacer()
+                if friendsWithBirthdaysOnSelectedDay.isEmpty {
+                  Text("no birthdays").font(.system(size: 14, weight: .light))
+                } else {
+                  List(friendsWithBirthdaysOnSelectedDay, id: \.id) { friend in
+                    HStack {
+                      Text(friend.name)
+                      Spacer()
+                      if let birthday = DateUtilities.getAgeString(
+                        for: friend, selectedDate: selectedDate)
+                      {
+                        Text(birthday).fontWeight(.light)
+                      }
+                    }
+                  }.listStyle(.plain)
+                }
+                NavigationLink(
+                  destination: AddFriendForm(
+                    editFriend: Friend(
+                      name: "", year: nil, day: selectedMonthAndDay.day ?? 1,
+                      month: selectedMonthAndDay.month ?? 1, fbId: nil), hideClearForm: true)
+                ) {
+                  Text("add a birthday")
+                }.buttonStyle(.borderedProminent)
+                Spacer()
+              }
+
+            }.presentationDetents([.medium])
+          }
+        )
+        .frame(height: UIScreen.main.bounds.height * 0.46)
+        VStack {
+          List {
+            Section(header: Text("upcoming birthdays")) {
+              ForEach(friendsWithBirthdaysThisMonth, id: \.id) { friend in
+                HStack {
+                  Text(friend.name)
+                  Spacer()
+                  if let birthday = DateUtilities.getBirthdayString(for: friend) {
+                    Text(birthday).fontWeight(.light)
+                  }
+                }
+              }
+            }
+          }.listStyle(InsetGroupedListStyle())
+          Spacer()
+        }.background(Color(UIColor.systemGray6))
+      }
+      .onChange(of: selectedDate) { newDate in
+        dateIsSelected = true
+      }
+    }
+  }
+
+  // returns friends with birthdays on $selectedDay. disregards year.
+  private var friendsWithBirthdaysOnSelectedDay: [Friend] {
     let selectedDateComponents = Calendar.current.dateComponents(
       [.month, .day], from: selectedDate)
 
@@ -29,6 +99,8 @@ struct CalendarView: View {
     }
   }
 
+  // sorted list of friends with birthdays in a given month. if given month is this month, only
+  // returns friends whose birthdays have not occurred yet.
   private var friendsWithBirthdaysThisMonth: [Friend] {
     let currentDate = Date()
     let currentDay = Calendar.current.component(.day, from: currentDate)
@@ -66,109 +138,26 @@ struct CalendarView: View {
     return Calendar.current.dateComponents([.month, .day], from: selectedDate)
   }
 
-  var body: some View {
-    NavigationView {
-      VStack {
-        CalendarViewRepresentable(
-          selectedDate: $selectedDate, dateIsSelected: $dateIsSelected,
-          monthBeingViewed: $monthBeingViewed
-        )
-        .environmentObject(viewModel)
-        .sheet(
-          isPresented: $dateIsSelected,
-          content: {
-            NavigationView {  // Wrap the VStack in a NavigationView
-              VStack {
-                Text(selectedDate.formatted(.dateTime.day().month(.wide).year())).font(.title)
-                  .textCase(.lowercase).padding()
-                Spacer()
-                if filteredFriends.isEmpty {
-                  Text("no birthdays").font(.system(size: 14, weight: .light))
-                } else {
-                  List(filteredFriends, id: \.id) { friend in
-                    FriendListSingleDateView(friend: friend, selectedDate: selectedDate)
-                      .environmentObject(viewModel)
-                  }.listStyle(.plain)
-                }
-                NavigationLink(
-                  destination: AddFriendForm(
-                    editFriend: Friend(
-                      name: "", year: nil, day: selectedMonthAndDay.day ?? 1,
-                      month: selectedMonthAndDay.month ?? 1, fbId: nil), hideClearForm: true)
-                ) {
-                  Text("add a birthday")
-                }.buttonStyle(.borderedProminent)
-                Spacer()
-              }
-
-            }.presentationDetents([.medium])
-          }
-        )
-        .frame(height: UIScreen.main.bounds.height * 0.46)
-        VStack {
-          List {
-            Section(header: Text("upcoming birthdays")) {
-              ForEach(friendsWithBirthdaysThisMonth, id: \.id) { friend in
-                FriendListItemView(friend: friend).environmentObject(viewModel)
-              }
-            }
-          }.listStyle(InsetGroupedListStyle())
-          //.listStyle(.plain)
-          Spacer()
-        }.background(Color(UIColor.systemGray6))
-      }
-      .onChange(of: selectedDate) { newDate in
-        dateIsSelected = true
-      }
-    }
-  }
-
 }
 
-struct FriendListItemView: View {
-  @EnvironmentObject var viewModel: ViewAndEditBirthdaysViewModel
-  let friend: Friend
-
-  var body: some View {
-    HStack {
-      Text(friend.name)
-      Spacer()
-      if let birthday = DateUtilities.getBirthdayString(for: friend) {
-        Text(birthday).fontWeight(.light)
-      }
-    }
-  }
-}
-
-struct FriendListSingleDateView: View {
-  @EnvironmentObject var viewModel: ViewAndEditBirthdaysViewModel
-  let friend: Friend
-  let selectedDate: Date
-
-  var body: some View {
-    HStack {
-      Text(friend.name)
-      Spacer()
-      if let birthday = DateUtilities.getAgeString(for: friend, selectedDate: selectedDate) {
-        Text(birthday).fontWeight(.light)
-      }
-    }
-  }
-}
-
+// almost all of this comes from the logrocket FSCalendar tutorial:
+// https://blog.logrocket.com/working-calendars-swift/#displaying-calendar-view-fscalendar
 struct CalendarViewRepresentable: UIViewRepresentable {
   @EnvironmentObject var viewModel: ViewAndEditBirthdaysViewModel
   typealias UIViewType = FSCalendar
 
   fileprivate var calendar = FSCalendar()
+
   @Binding var selectedDate: Date
   @Binding var dateIsSelected: Bool
+
+  // we need the "month being viewed" to properly display upcoming birthdays for that
+  // month
   @Binding var monthBeingViewed: Int
 
   func makeUIView(context: Context) -> FSCalendar {
     calendar.delegate = context.coordinator
     calendar.dataSource = context.coordinator
-    //calendar.delgateAppearance = context.coordinator
 
     calendar.appearance.headerDateFormat = "MMMM"
     calendar.appearance.weekdayTextColor = .darkGray
@@ -192,7 +181,6 @@ struct CalendarViewRepresentable: UIViewRepresentable {
     let calendar = Calendar.current
     let month = calendar.component(.month, from: uiView.currentPage)
     self.monthBeingViewed = month
-
   }
 
   func makeCoordinator() -> Coordinator {
@@ -213,9 +201,7 @@ struct CalendarViewRepresentable: UIViewRepresentable {
     }
 
     func calendarDataDidChange() {
-      print("okay we're really gonna reload now")
       parent.calendar.reloadData()
-      // changeMonthName()
     }
 
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
@@ -225,24 +211,6 @@ struct CalendarViewRepresentable: UIViewRepresentable {
 
       parent.monthBeingViewed = month
 
-      // changeMonthName()
-    }
-
-    func changeMonthName() {
-      let collectionView =
-        parent.calendar.calendarHeaderView.value(forKey: "collectionView") as! UICollectionView
-
-      collectionView.visibleCells.forEach { (cell) in
-        let c = cell as! FSCalendarHeaderCell
-
-        c.titleLabel.text = c.titleLabel.text?.lowercased()
-
-      }
-
-      for header in parent.calendar.visibleStickyHeaders {
-        let h = header as! FSCalendarStickyHeader
-        h.titleLabel.text = h.titleLabel.text?.lowercased()
-      }
     }
 
     func calendar(
@@ -258,10 +226,7 @@ struct CalendarViewRepresentable: UIViewRepresentable {
     }
 
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
-      print("numberOfEventsFor called with date: \(date)")
-
       let eventDates = parent.viewModel.friends.compactMap { friend -> Date? in
-        print(friend.name)
         let month = friend.month
         let day = friend.day
 
@@ -270,6 +235,8 @@ struct CalendarViewRepresentable: UIViewRepresentable {
         friendDateComponents.month = month
         friendDateComponents.day = day
 
+        // this is probably extranneous but I'm afraid to take it out
+        // in case there is some very odd, very rare bug or something
         if let year = friend.year {
           friendDateComponents.year = Int(year)
         }
@@ -287,6 +254,7 @@ struct CalendarViewRepresentable: UIViewRepresentable {
       return eventCount
     }
 
+    // this is also possibly-extranneous
     func calendar(
       _ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition
     ) -> Bool {

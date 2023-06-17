@@ -26,26 +26,42 @@ exports.sendWeeklyNotifications = functions.pubsub
 
       for (const userId in users) {
         const user = users[userId];
-        const isNotificationEnabled = user.notificationEnabled;
+        const deviceTokens = user.deviceTokens || {};
         const friendsWithBirthdays = friendsWithBirthdaysInTheNextWeek(
           user.friends || {}
         );
+        const notification = createNotification(friendsWithBirthdays); // Create the notification payload
 
-        if (isNotificationEnabled && friendsWithBirthdays.length) {
-          const notification = createNotification(friendsWithBirthdays); // Create the notification payload
+        for (const tokenId in deviceTokens) {
+          const deviceToken = deviceTokens[tokenId];
+          const isNotificationEnabled = deviceToken.notificationEnabled;
 
-          // Use FCM API to send the notification to the user's device
-          console.log("sending a notification to user ", userId);
-          await admin.messaging().sendToDevice(user.deviceToken, notification);
-        } else {
-          console.log("not sending a notification to user ", userId);
+          if (isNotificationEnabled && friendsWithBirthdays.length) {
+            // Use FCM API to send the notification to the user's device
+            console.log(
+              "Sending a notification to user",
+              userId,
+              "with token",
+              tokenId
+            );
+            await admin
+              .messaging()
+              .sendToDevice(deviceToken.token, notification);
+          } else {
+            console.log(
+              "Not sending a notification to user",
+              userId,
+              "with token",
+              tokenId
+            );
+          }
         }
       }
 
-      console.log("weekly notifications sent successfully");
+      console.log("Weekly notifications sent successfully");
       return null;
     } catch (error) {
-      console.error("failed to send weekly notifications:", error);
+      console.error("Failed to send weekly notifications:", error);
       return null;
     }
   });

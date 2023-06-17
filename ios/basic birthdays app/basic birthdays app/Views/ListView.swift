@@ -1,8 +1,8 @@
 //
-//  ViewAndEditBirthdaysView.swift
-//  dead simple birthdays
+// ViewAndEditBirthdaysView.swift
+// basic birthday app
 //
-//  Created by ian on 6/3/23.
+// notes:
 //
 
 import SwiftUI
@@ -44,7 +44,7 @@ struct ListView: View {
   private var sortedFriends: [Friend] {
     switch selectedSortOption {
     case .name:
-      return viewModel.friends.sorted { $0.name < $1.name }
+      return viewModel.friends.sorted { $0.name.lowercased() < $1.name.lowercased() }
     case .birthday:
       return viewModel.friends.sorted { friend1, friend2 in
         guard let birthday1 = DateUtilities.getBirthdayDate(for: friend1),
@@ -55,12 +55,5 @@ struct ListView: View {
         return birthday1 < birthday2
       }
     }
-  }
-}
-
-struct ListView_Previews: PreviewProvider {
-  static var previews: some View {
-    ListView()
-      .environmentObject(ViewAndEditBirthdaysViewModel())
   }
 }
