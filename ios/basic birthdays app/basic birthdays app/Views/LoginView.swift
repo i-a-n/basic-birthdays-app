@@ -12,13 +12,13 @@ class LoginViewAuthDelegate: NSObject, FUIAuthDelegate {
   var onLogin: (() -> Void)?
 
   func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
-    if let user = authDataResult?.user {
+    if (authDataResult?.user) != nil {
       // auth successful, call the function MainView provided
       onLogin?()
     } else {
       // auth failed
       // TODO: display this in the MainView.swift view
-      print("error logging in: \(error)")
+      print("error logging in: \(String(describing: error))")
     }
   }
 }
