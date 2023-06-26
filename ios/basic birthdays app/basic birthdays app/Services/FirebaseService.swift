@@ -34,11 +34,29 @@ class FirebaseService: ObservableObject {
     auth.createUser(withEmail: email, password: password, completion: completion)
   }
 
-  // I do not believe this is used anywhere at current
   func signOut() throws {
     try auth.signOut()
   }
 
+
+  func deleteUser(completion: @escaping (Result<Void, Error>) -> Void) {
+      deleteAllUserData { result in
+          switch result {
+          case .success:
+              Auth.auth().currentUser?.delete { error in
+                  if let error = error {
+                      completion(.failure(error))
+                  } else {
+                      completion(.success(()))
+                  }
+              }
+          case .failure(let error):
+              completion(.failure(error))
+          }
+      }
+  }
+
+  
   func getCurrentUserID() -> String? {
     return Auth.auth().currentUser?.uid
   }
@@ -172,6 +190,36 @@ class FirebaseService: ObservableObject {
       }
     }
   }
+  
+  func deleteAllUserData(completion: @escaping (Result<Void, Error>) -> Void) {
+      guard let user = Auth.auth().currentUser else {
+          // User is not logged in
+          completion(.failure(NSError(domain: "", code: 401, userInfo: nil)))
+          return
+      }
+
+      let userRef = db.child("users").child(user.uid)
+      
+      userRef.observeSingleEvent(of: .value) { snapshot in
+          guard snapshot.exists() else {
+              // User object doesn't exist
+              completion(.failure(NSError(domain: "", code: 404, userInfo: nil)))
+              return
+          }
+          
+          let children = snapshot.children.allObjects
+          
+          for child in children {
+              if let childSnapshot = child as? DataSnapshot {
+                  let childRef = userRef.child(childSnapshot.key)
+                  childRef.removeValue()
+              }
+          }
+          
+          completion(.success(()))
+      }
+  }
+
 
   func deleteFriend(friendID: String, completion: @escaping (Result<Void, Error>) -> Void) {
     guard let user = Auth.auth().currentUser else {

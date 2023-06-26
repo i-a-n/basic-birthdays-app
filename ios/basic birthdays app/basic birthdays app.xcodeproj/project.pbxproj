@@ -23,6 +23,7 @@
 		3C6B3DCA2A33AEAF0099B4D6 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B3DC32A33AEAF0099B4D6 /* ListView.swift */; };
 		3C6B3DCB2A33AEAF0099B4D6 /* AddFriendForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B3DC42A33AEAF0099B4D6 /* AddFriendForm.swift */; };
 		3C6B3DD12A37CC810099B4D6 /* CalendarObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6B3DD02A37CC810099B4D6 /* CalendarObserver.swift */; };
+		3CE13CC02A463390009180F0 /* LoginUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE13CBF2A463390009180F0 /* LoginUtilities.swift */; };
 		3CE9D54D2A3A31AE0022D08B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3CE9D54C2A3A31AE0022D08B /* GoogleService-Info.plist */; };
 		3CE9D5502A3A498C0022D08B /* DateUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE9D54F2A3A498C0022D08B /* DateUtilities.swift */; };
 /* End PBXBuildFile section */
@@ -47,6 +48,7 @@
 		3C6B3DC32A33AEAF0099B4D6 /* ListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 		3C6B3DC42A33AEAF0099B4D6 /* AddFriendForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendForm.swift; sourceTree = "<group>"; };
 		3C6B3DD02A37CC810099B4D6 /* CalendarObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarObserver.swift; sourceTree = "<group>"; };
+		3CE13CBF2A463390009180F0 /* LoginUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUtilities.swift; sourceTree = "<group>"; };
 		3CE9D54C2A3A31AE0022D08B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3CE9D54F2A3A498C0022D08B /* DateUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtilities.swift; sourceTree = "<group>"; };
 		4F30B95DEA3A82A95F188DEE /* Pods-basic birthdays app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-basic birthdays app.release.xcconfig"; path = "Target Support Files/Pods-basic birthdays app/Pods-basic birthdays app.release.xcconfig"; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				3CE9D54F2A3A498C0022D08B /* DateUtilities.swift */,
+				3CE13CBF2A463390009180F0 /* LoginUtilities.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				3C6B3DC62A33AEAF0099B4D6 /* CalendarView.swift in Sources */,
 				3C6B3DC72A33AEAF0099B4D6 /* NavigationBarView.swift in Sources */,
 				3C6B3DD12A37CC810099B4D6 /* CalendarObserver.swift in Sources */,
+				3CE13CC02A463390009180F0 /* LoginUtilities.swift in Sources */,
 				3C6B3DC82A33AEAF0099B4D6 /* LoginView.swift in Sources */,
 				3C6B3DBD2A33AE3A0099B4D6 /* ViewAndEditBirthdaysViewModel.swift in Sources */,
 				3C1164DF2A338E4400963E6E /* MainView.swift in Sources */,

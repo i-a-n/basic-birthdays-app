@@ -24,11 +24,13 @@ struct AddFriendForm: View {
     case name
   }
   @FocusState private var focusedField: Field?
-
+  
   var editFriend: Friend?
   var hideClearForm: Bool?
+  @Binding var isLoggedIn: Bool
 
-  init(editFriend: Friend? = nil, hideClearForm: Bool? = false) {
+  init(isLoggedIn: Binding<Bool>, editFriend: Friend? = nil, hideClearForm: Bool? = false) {
+    self._isLoggedIn = isLoggedIn
     self.editFriend = editFriend
     self.hideClearForm = hideClearForm
 
@@ -101,11 +103,11 @@ struct AddFriendForm: View {
             }
             Button("add friend") {
               submitForm()
-            }.buttonStyle(.borderedProminent)
+            }.disabled(!isLoggedIn).buttonStyle(.borderedProminent)
           }
         }
       }
-    }.toolbar {
+    }.opacity(isLoggedIn ? 1.0 : 0.33).toolbar {
       ToolbarItem(placement: .keyboard) {
         Button("done") {
           focusedField = nil

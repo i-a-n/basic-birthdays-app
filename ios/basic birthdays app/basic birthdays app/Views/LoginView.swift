@@ -8,7 +8,7 @@
 import FirebasePhoneAuthUI
 import SwiftUI
 
-class LoginViewAuthDelegate: NSObject, FUIAuthDelegate {
+class LoginViewAuthDelegate: NSObject, FUIAuthDelegate, ObservableObject {
   var onLogin: (() -> Void)?
 
   func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
@@ -25,7 +25,8 @@ class LoginViewAuthDelegate: NSObject, FUIAuthDelegate {
 
 struct LoginView: View {
   var onLogin: (() -> Void)
-  private let authDelegate = LoginViewAuthDelegate()
+ // private let authDelegate = LoginViewAuthDelegate()
+  @StateObject private var authDelegate = LoginViewAuthDelegate()
 
   var body: some View {
     VStack {
@@ -35,12 +36,12 @@ struct LoginView: View {
           withPresenting: (UIApplication.shared.windows.first?.rootViewController)!,
           phoneNumber: nil)
       }) {
-        Text("login with phone")
+        Text("sign in / sign up")
       }
       .buttonStyle(.borderedProminent)
       .padding()
       Text(
-        "your phone number is only used for logging you in. it will never be saved anywhere else or used for anything else, ever."
+        "add and view birthdays by signing in via SMS. your phone number will never be saved anywhere else or used for anything else, ever."
       ).font(.system(size: 14)).multilineTextAlignment(.center).padding([.leading, .trailing], 28)
 
     }
