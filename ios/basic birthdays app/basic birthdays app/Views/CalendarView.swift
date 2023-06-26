@@ -17,13 +17,14 @@ struct CalendarView: View {
   @EnvironmentObject var viewModel: ViewAndEditBirthdaysViewModel
 
   @Binding var activeView: ActiveView
+  @Binding var isLoggedIn: Bool
 
   var body: some View {
-    NavigationView {
+    NavigationStack {
       VStack {
         CalendarViewRepresentable(
           selectedDate: $selectedDate, dateIsSelected: $dateIsSelected,
-          monthBeingViewed: $monthBeingViewed
+          isLoggedIn: $isLoggedIn, monthBeingViewed: $monthBeingViewed
         )
         .environmentObject(viewModel)
         .sheet(
@@ -51,6 +52,7 @@ struct CalendarView: View {
                 }
                 NavigationLink(
                   destination: AddFriendForm(
+                    isLoggedIn: $isLoggedIn,
                     editFriend: Friend(
                       name: "", year: nil, day: selectedMonthAndDay.day ?? 1,
                       month: selectedMonthAndDay.month ?? 1, fbId: nil), hideClearForm: true)
@@ -61,25 +63,31 @@ struct CalendarView: View {
               }
 
             }.presentationDetents([.medium])
+
           }
         )
         .frame(height: UIScreen.main.bounds.height * 0.46)
-        VStack {
-          List {
-            Section(header: Text("upcoming birthdays")) {
-              ForEach(friendsWithBirthdaysThisMonth, id: \.id) { friend in
-                HStack {
-                  Text(friend.name)
-                  Spacer()
-                  if let birthday = DateUtilities.getBirthdayString(for: friend) {
-                    Text(birthday).fontWeight(.light)
+        if isLoggedIn {
+          VStack {
+
+            List {
+              Section(header: Text("upcoming birthdays")) {
+                ForEach(friendsWithBirthdaysThisMonth, id: \.id) { friend in
+                  HStack {
+                    Text(friend.name)
+                    Spacer()
+                    if let birthday = DateUtilities.getBirthdayString(for: friend) {
+                      Text(birthday).fontWeight(.light)
+                    }
                   }
                 }
               }
-            }
-          }.listStyle(InsetGroupedListStyle())
+            }.listStyle(InsetGroupedListStyle())
+            Spacer()
+          }.background(Color(UIColor.systemGray6))
+        } else {
           Spacer()
-        }.background(Color(UIColor.systemGray6))
+        }
       }
       .onChange(of: selectedDate) { newDate in
         dateIsSelected = true
@@ -150,6 +158,7 @@ struct CalendarViewRepresentable: UIViewRepresentable {
 
   @Binding var selectedDate: Date
   @Binding var dateIsSelected: Bool
+  @Binding var isLoggedIn: Bool
 
   // we need the "month being viewed" to properly display upcoming birthdays for that
   // month
@@ -254,10 +263,13 @@ struct CalendarViewRepresentable: UIViewRepresentable {
       return eventCount
     }
 
-    // this is also possibly-extranneous
+    // this disables selecting dates if the user isn't logged in
     func calendar(
       _ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition
     ) -> Bool {
+      if !parent.isLoggedIn {
+        return false
+      }
       return true
     }
 

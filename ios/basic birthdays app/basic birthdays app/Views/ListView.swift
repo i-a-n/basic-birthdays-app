@@ -10,6 +10,7 @@ import SwiftUI
 struct ListView: View {
   @EnvironmentObject var viewModel: ViewAndEditBirthdaysViewModel
   @State private var selectedSortOption: SortOption = .birthday
+  @Binding var isLoggedIn: Bool
 
   enum SortOption {
     case name
@@ -17,7 +18,7 @@ struct ListView: View {
   }
 
   var body: some View {
-    NavigationView {
+    NavigationStack {
       VStack {
         Picker("sort option", selection: $selectedSortOption) {
           Text("sort by birthday").tag(SortOption.birthday)
@@ -26,7 +27,7 @@ struct ListView: View {
         .pickerStyle(SegmentedPickerStyle()).padding()
 
         List(sortedFriends, id: \.id) { friend in
-          NavigationLink(destination: AddFriendForm(editFriend: friend)) {
+          NavigationLink(destination: AddFriendForm(isLoggedIn: $isLoggedIn, editFriend: friend)) {
             HStack {
               Text(friend.name)
               Spacer()
