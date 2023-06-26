@@ -6,11 +6,15 @@ const functions = require("firebase-functions");
 // uncomment to test locally
 // var serviceAccount = require("/Users/ian/scratch/cloud-functions-service-account.json");
 
-admin.initializeApp({
-  // unncomment to test locally
+admin
+  .initializeApp
+  // uncomment to test locally
+  // ({
   // credential: admin.credential.cert(serviceAccount),
   // databaseURL: "https://basic-birthdays-app-default-rtdb.firebaseio.com",
-});
+  // });
+  // ...and comment out the next line
+  ();
 
 type Friends = Record<
   string,
@@ -18,7 +22,7 @@ type Friends = Record<
 >;
 
 exports.sendWeeklyNotifications = functions.pubsub
-  .schedule("every monday 09:00")
+  .schedule("every monday 09:30")
   .onRun(async () => {
     try {
       const usersSnapshot = await admin.database().ref("/users").once("value");
