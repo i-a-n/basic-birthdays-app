@@ -34,23 +34,24 @@ exports.sendWeeklyNotifications = functions.pubsub
         const friendsWithBirthdays = friendsWithBirthdaysInTheNextWeek(
           user.friends || {}
         );
-        const notification = createNotification(friendsWithBirthdays); // Create the notification payload
 
         for (const tokenId in deviceTokens) {
           const deviceToken = deviceTokens[tokenId];
           const isNotificationEnabled = deviceToken.notificationEnabled;
 
           if (isNotificationEnabled && friendsWithBirthdays.length) {
+            const notification = createNotification(
+              friendsWithBirthdays,
+              deviceToken.token
+            ); // Create the notification payload
             // Use FCM API to send the notification to the user's device
             console.log(
               "Sending a notification to user",
               userId,
-              "with token",
+              "with token ID",
               tokenId
             );
-            await admin
-              .messaging()
-              .sendToDevice(deviceToken.token, notification);
+            await admin.messaging().send(notification);
           } else {
             console.log(
               "Not sending a notification to user",
@@ -109,7 +110,10 @@ function getBirthdayText(friend: {
     : `'s birthday is ${formattedDay.toLowerCase()}`; // Convert to lowercase
 }
 
-function createNotification(friendsWithBirthdays: string[]) {
+function createNotification(
+  friendsWithBirthdays: string[],
+  deviceToken: string
+) {
   let notificationBody = "";
 
   if (friendsWithBirthdays.length === 0) {
@@ -134,6 +138,7 @@ function createNotification(friendsWithBirthdays: string[]) {
     }
   }
   return {
+    token: deviceToken,
     notification: {
       title: "basic birthday notification",
       body: notificationBody,
